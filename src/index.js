@@ -4,10 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { BrowserRouter } from 'react-router-dom';
+import { RecipeContext,RecipeProvider } from './context/RecipeContext';
+
+export {RecipeContext};
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <RecipeProvider>
+        <App />
+      </RecipeProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

@@ -1,0 +1,18 @@
+.filter-bar-container {
+    border: 1px solid rgb(137, 135, 135);
+    margin: 1rem 2rem;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: left;
+}
+.radio-container {
+    display: inline-block;
+    font-size: 1.2rem;
+}
+.search-input {
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    font-size: 1.2rem;
+}
