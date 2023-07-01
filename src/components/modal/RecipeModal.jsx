@@ -6,7 +6,7 @@ import { RecipeContext } from "../../context/RecipeContext";
 
 export const RecipeModal=()=>
 {
-    const {state,dispatch}=useContext(RecipeContext);
+    const {state,dispatch,addRecipe}=useContext(RecipeContext);
     const {recipeInputs:{name,imageLink,cuisine,ingredients,instructions}}=state;
 
     return (
@@ -42,7 +42,7 @@ export const RecipeModal=()=>
                 </div>
 
                 <button className="close-button" onClick={()=>dispatch({type:"TOGGLE_MODAL",payload:false})}>Close</button>
-                <button className="submit-button" onClick={()=>dispatch({type:"TOGGLE_MODAL",payload:false})}>Submit</button>
+                <button className="submit-button" onClick={()=>addRecipe()}>Submit</button>
             </div>
         </div>
     )

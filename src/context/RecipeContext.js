@@ -39,11 +39,15 @@ export const RecipeProvider=({children})=>
 
 
             case "UPDATE_LOCALSTORAGE":
-                localStorage.setItem("recipes",recipes);
+                localStorage.setItem("recipes",JSON.stringify(recipes));
                 return recipe;
 
             case "ADD_RECIPE":
-                return {...recipe,recipes:[...recipe.recipes,payload],showModal:false};    
+                return {...recipe,recipes:[...recipe.recipes,payload],showModal:false,recipeInputs:{name: "",
+                imageLink: "",
+                cuisine: "",
+                ingredients: [],
+                instructions: [],}};    
                 
              
             default:
@@ -64,12 +68,13 @@ export const RecipeProvider=({children})=>
 
     const fetchRecipes=()=>
     {
-        const recipes=localStorage.getItem("recipes");
-        if(recipes===null)
+        const storedRecipes=localStorage.getItem("recipes");
+        if(storedRecipes===null)
         {
             dispatch({type:"FETCH_RECIPES",payload:RecipeDb});
         }
         else {
+            const recipes = JSON.parse(storedRecipes);
             dispatch({type:"FETCH_RECIPES",payload:recipes});
         }
     }
@@ -90,7 +95,7 @@ export const RecipeProvider=({children})=>
     }
 
     return (
-        <RecipeContext.Provider value={{state,dispatch,fetchRecipes}}>
+        <RecipeContext.Provider value={{state,dispatch,fetchRecipes,addRecipe}}>
             {children}
         </RecipeContext.Provider>
     )
