@@ -48,7 +48,9 @@ export const RecipeProvider=({children})=>
                 cuisine: "",
                 ingredients: [],
                 instructions: [],}};    
-                
+              
+            case "DELETE_RECIPE":
+                return {...recipe,recipes:payload};
              
             default:
                 return recipe;
@@ -94,8 +96,17 @@ export const RecipeProvider=({children})=>
         }
     }
 
+    const deleteRecipe=(index)=>
+    {
+        const {recipes}=state;
+        const updatedRecipe=recipes.filter((item,i)=>i!==index);
+
+        dispatch({type:"DELETE_RECIPE",payload:updatedRecipe});
+        dispatch({type:"UPDATE_LOCALSTORAGE"});
+    }
+
     return (
-        <RecipeContext.Provider value={{state,dispatch,fetchRecipes,addRecipe}}>
+        <RecipeContext.Provider value={{state,dispatch,fetchRecipes,addRecipe,deleteRecipe}}>
             {children}
         </RecipeContext.Provider>
     )

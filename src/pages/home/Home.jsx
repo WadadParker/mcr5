@@ -20,9 +20,9 @@ export const Home=()=>
             <FilterBar />
             <h1>This is home</h1>
             <ul>
-                {recipes?.map(item=>(
+                {recipes?.map((item,index)=>(
                     <li key={item?.name}>
-                        <RecipeItem item={item} />
+                        <RecipeItem item={item} index={index} />
                     </li>
                 ))}
             </ul>
