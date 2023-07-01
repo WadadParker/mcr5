@@ -51,6 +51,12 @@ export const RecipeProvider=({children})=>
               
             case "DELETE_RECIPE":
                 return {...recipe,recipes:payload};
+
+            case "UPDATE_SEARCH":
+                return {...recipe,search:payload};    
+              
+            case "SORT_CATEGORY":
+                return {...recipe,sort:payload};    
              
             default:
                 return recipe;
@@ -63,7 +69,9 @@ export const RecipeProvider=({children})=>
         imageLink: "",
         cuisine: "",
         ingredients: [],
-        instructions: [],}
+        instructions: [],},
+        search:"",
+        sort:"",
     }
 
     const [state,dispatch]=useReducer(RecipeReducer,initialState);
@@ -105,8 +113,30 @@ export const RecipeProvider=({children})=>
         dispatch({type:"UPDATE_LOCALSTORAGE"});
     }
 
+    const sortedRecipes=()=>
+    {
+        const {recipes,sort,search}=state;
+
+        if(sort==="name")
+        {
+            return [...recipes].filter(({name})=>name.toLowerCase().includes(search.toLowerCase()));
+        }
+        else if(sort==="ingredients")
+        {
+            return [...recipes].filter(({ingredients})=>ingredients.map(item=>item.toLowerCase().includes(search.toLowerCase())));
+        }
+        else if(sort==="cuisine")
+        {
+            return [...recipes].filter(({cuisine})=>cuisine.toLowerCase().includes(search.toLowerCase()));
+        }
+        else {
+            return recipes;
+        }
+        
+    }
+
     return (
-        <RecipeContext.Provider value={{state,dispatch,fetchRecipes,addRecipe,deleteRecipe}}>
+        <RecipeContext.Provider value={{state,dispatch,fetchRecipes,addRecipe,deleteRecipe,sortedRecipes}}>
             {children}
         </RecipeContext.Provider>
     )

@@ -1,0 +1,6 @@
+.recipe-ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,20rem);
+    list-style: none;
+    gap: 1rem;
+}

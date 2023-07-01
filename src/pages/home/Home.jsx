@@ -9,7 +9,7 @@ import { RecipeItem } from "../../components/recipeItem/RecipeItem";
 
 export const Home=()=>
 {
-    const {state,dispatch,fetchRecipes}=useContext(RecipeContext);
+    const {state,dispatch,fetchRecipes,sortedRecipes}=useContext(RecipeContext);
     const {showModal,recipes}=state;
 
     useEffect(()=>fetchRecipes(),[]);
@@ -19,8 +19,8 @@ export const Home=()=>
             {showModal && <RecipeModal />}
             <FilterBar />
             <h1>This is home</h1>
-            <ul>
-                {recipes?.map((item,index)=>(
+            <ul className="recipe-ul">
+                {sortedRecipes()?.map((item,index)=>(
                     <li key={item?.name}>
                         <RecipeItem item={item} index={index} />
                     </li>
