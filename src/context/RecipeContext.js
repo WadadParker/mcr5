@@ -71,7 +71,7 @@ export const RecipeProvider=({children})=>
         ingredients: [],
         instructions: [],},
         search:"",
-        sort:"",
+        sort:"name",
     }
 
     const [state,dispatch]=useReducer(RecipeReducer,initialState);
